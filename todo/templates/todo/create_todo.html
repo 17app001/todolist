@@ -1,12 +1,48 @@
-{% extends 'base.html' %}
-{% block title %}
-事項建立頁面
-{% endblock %}
-{% block content %}
-<h1>CreateTodo</h1>
-<form action="" method="POST">
-  {% csrf_token %}
-  {{form.as_p}}
-  <button type="submit">建立</button>
-</form>
+{% extends 'base.html' %} {% block head %}
+<title>Create</title>
+<style>
+  input {
+    text-align: center;
+  }
+</style>
+{% endblock %} {% block content %}
+<div class="hero is-info is-fullheight-with-navbar">
+  <div class="hero-body">
+    <div class="container is-vcentered">
+      <div class="columns is-centered">
+        <div class="column is-6">
+          <form action="" class="box" method="POST">
+            {% csrf_token %}
+            <div class="field">
+              <label class="label has-text-centered is-size-3"> 標題 </label>
+              <div class="control">
+                <input type="text" class="input" name="title" />
+              </div>
+            </div>
+            <label class="label has-text-left is-size-4"> 事項 </label>
+            <div class="field">
+              <div class="control">
+                <textarea class="textarea" name="text"></textarea>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <label class="label">
+                  <input type="checkbox" class="checkbox" name="important" />
+                  <span class="has-text-danger is-size-5">重要</span>
+
+                  <input type="checkbox" class="checkbox" name="completed" />
+                  <span class="has-text-primary is-size-5">完成</span>
+                </label>
+              </div>
+            </div>
+            <div class="field has-text-centered">
+              <button type="submit" class="button is-warning">建立</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

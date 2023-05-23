@@ -1,30 +1,62 @@
 {% extends 'base.html' %}
-{% block title %}
-事項頁面
+{% block head %}
+<title>View</title>
 {% endblock %}
+
 {% block content %}
-{% if todo %}
-<h2 style="background-color: aquamarine;padding: 12px 6px;">{{todo.title}}
-  {% if todo.important %}
-  <span style="color:red">(重要)</span>
-  {% endif %}
-</h2>
-<hr>
-<li style="white-space: pre-line;list-style-type: none;">{{todo.text}}</li>
-<li>建立時間:{{todo.created}}</li>
-<li>完成時間:
-  {% if todo.date_completed %}
-  {{todo.date_completed}}
-  {% endif %}
-</li>
-<hr>
-<form action="" method="POST">
-  {% csrf_token %}
-  {{form.as_p}}
-  <input type="submit" value="更新" name="update">
-  <input type="submit" value="刪除" name="delete" onclick="return confirm('確定刪除?')">
-</form>
-{% else %}
-無此代辦事項
-{% endif %}
+<div class="hero is-info is-fullheight-with-navbar">
+  <div class="hero-body">
+    <div class="container is-vcentered">
+      <div class="columns is-centered">
+        <div class="column is-6">
+          <form action="" class="box" method="POST">
+            {% csrf_token %}
+            <div class="field">
+              <label class="label has-text-centered is-size-3">
+                標題
+              </label>
+              <label class="label has-text-right is-size-6 has-text-grey">
+                {{date}}
+              </label>
+              <div class="control">
+                <input type="text" class="input" name="title" value="{{ todo.title }}">
+              </div>
+            </div>
+            <label class="label has-text-left is-size-4">
+              事項
+            </label>
+            <div class="field">
+              <div class="control">
+                <textarea class="textarea" name="text">{{ todo.text }}</textarea>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <label class="label">
+                  {% if todo.important %}
+                  <input type="checkbox" class="checkbox" checked name="important"> 重要
+                  {% else %}
+                  <input type="checkbox" class="checkbox" name="important"> 重要
+                  {% endif %}
+                  {% if todo.completed %}
+                  <input type="checkbox" class="checkbox" checked name="completed"> 完成
+                  {% else %}
+                  <input type="checkbox" class="checkbox" name="completed"> 完成
+                  {% endif %}
+                </label>
+              </div>
+              <div class="message">{{message}}</div>
+            </div>
+            <div class="field has-text-centered">
+              <input type="submit" name="update" class="button is-warning" value="更新"></button>
+              <input type="submit" name="delete" class="button is-danger" value="刪除"
+                onclick="return confirm('確定刪除?')"></button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

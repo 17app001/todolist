@@ -1,21 +1,29 @@
-{% extends 'base.html' %}
-{% block title %}
-個人資訊頁面
-{% endblock %}
-{% block content %}
-<h1>Profile</h1>
-<hr>
-{% if user.is_authenticated %}
-<h2>{{user.username}}</h2>
-{% if user.is_superuser == 1 %}
-<li style="color:blue">(管理員)</li>
-{% endif %}
-<li>信箱:{{user.email}}</li>
-<li>建立時間:{{user.date_joined}}</li>
-<li>登入時間:{{user.last_login}}</li>
-{% else %}
-<h2>請先
-    <a href="{% url 'login' %}">登入</a>
-</h2>
-{% endif %}
+{% extends 'base.html' %} {% block title %}
+View
+{% endblock %} {% block content %}
+<div class="hero is-info is-fullheight-with-navbar">
+    <div class="hero-body">
+        <div class="container is-vcentered">
+            <div class="columns is-centered">
+                <div class="column is-6 box">
+                    <div class="field">
+                        <label class="label has-text-centered is-size-3"> 個人資訊 </label>
+                        <hr />
+                        {% if user.is_authenticated %}
+                        <div class="is-size-4 has-text-centered">
+                            {{user.username|upper}}
+                            <hr />
+                            <div class="is-size-6 has-text-white has-background-black has-text-danger box">
+                                <h2>信箱:{{user.email}}</h2>
+                                <h2>加入日期:{{user.date_joined}}</h2>
+                                <h2>最後登入日期:{{user.last_login}}</h2>
+                            </div>
+                        </div>
+                        {%endif%}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

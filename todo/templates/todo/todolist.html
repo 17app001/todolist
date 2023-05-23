@@ -1,30 +1,60 @@
 {% extends 'base.html' %}
 {% block title %}
-代辦事項頁面
+TodoList
 {% endblock %}
 {% block content %}
-<h1>TodoList</h1>
-{% for todo in todos %}
-{% if not todo.completed %}
-<li><span style="color:rgb(9, 9, 130)">[{{todo.created}}]</span>
-  <a href="{% url 'todo' todo.id %}" style="color:black;text-decoration: underline;">
-    {% if todo.completed %}
-    <s>{{todo.title}}</s>
-    {% else %}
-    {{todo.title}}
-    {% endif %}
-  </a>
-  {% if todo.important %}
-  <span style="color:red">重要!</span>
-  {% endif %}
-</li>
-<form action="{% url 'delete-todo' todo.id %}" style="display: inline;">
-  <button type="submit" onclick="return confirm('是否刪除?')">刪除</button>
-</form>
-<form action="{% url 'completed-todo' todo.id %}" style="display: inline;">
-  <button type="submit">完成</button>
-</form>
 
-{% endif %}
-{% endfor %}
+<div class="hero is-link is-fullheight-with-navbar">
+  <div class="hero-body">
+    <div class="container">
+      {% if not todos %}
+      <h1 class="is-size-1">目前無列表</h1>
+      <form action="{% url 'createtodo' %}">
+        <button class="button is-warning">新增</button>
+      </form>
+      {% else %} {% for todo in todos %}
+      {% if not todo.completed %}
+      <div class="columns is-centered">
+        <div class="column is-6">
+          <div class="card">
+            <header class="card-header">
+              {% if todo.important %}
+              <p class="card-header-title has-text-danger is-size-4">
+                {{ todo.title|truncatechars:20 }} {% if todo.completed %}
+                (完成){%endif %}
+              </p>
+              {% else %}
+              <p class="card-header-title has-text-info is-size-4">
+                {{todo.title|truncatechars:20}} {% if todo.completed %}
+                (完成){%endif %}
+              </p>
+              {% endif %}
+              <p class="has-text-right pr-3 py-3 has-text-grey">
+                <small>{{todo.created}}</small>
+              </p>
+            </header>
+            <div class="card-content">
+              <div class="content">
+                {{todo.text}}
+                <br />
+                <p class="has-text-gray-light has-text-right is-size-6">
+                  <small></small>
+                </p>
+              </div>
+            </div>
+            <footer class="card-footer">
+              <a href="{% url 'todo' todo.id %}" class="card-footer-item">檢視</a>
+              <a href="{% url 'delete-todo' todo.id %}" class="card-footer-item has-text-danger"
+                onclick="return confirm('確定刪除?')">刪除</a>
+              <a href="{% url 'completed-todo' todo.id %}" class="card-footer-item has-text-primary">完成</a>
+            </footer>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %} {% endif %}
+    </div>
+  </div>
+</div>
+
 {% endblock %}

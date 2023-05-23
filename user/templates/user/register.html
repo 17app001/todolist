@@ -1,30 +1,65 @@
-{% extends 'base.html' %}
-{% block title %}
-註冊頁面
-{% endblock %}
-{% block content %}
-<h1>Register</h1>
-<hr>
-<form action="" method="POST">
-    {% csrf_token %}
+{% extends 'base.html' %} {% block title %}
+Register
+{% endblock %} {% block content %}
+<div class="hero is-info is-fullheight-with-navbar">
+    <div class="hero-body">
+        <div class="container is-vcentered">
+            <div class="columns is-centered">
+                <div class="column is-4">
+                    <form action="" class="box" method="POST">
+                        {% csrf_token %}
+                        <div class="field">
+                            <label class="label"> 使用者名稱 </label>
+                            <div class="control has-icons-left">
+                                <input type="text" class="input" name="username" placeholder="jerry" />
+                                <span class="icon is-small is-left">
+                                    <i class="fa fa-user"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label"> 使用者名稱 </label>
+                            <div class="control has-icons-left">
+                                <input type="text" class="input" name="email" placeholder="jerry@gmail.com" />
+                                <span class="icon is-small is-left">
+                                    <i class="fa fa-envelope"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label"> 使用者密碼 </label>
+                            <div class="control has-icons-left">
+                                <input type="password" class="input" name="password1" placeholder="********" />
+                                <span class="icon is-small is-left">
+                                    <i class="fa fa-lock"></i>
+                                </span>
+                            </div>
+                        </div>
 
-    <p>
-        <label for="username">帳號</label>
-        <input type="text" name="username" required>
-    </p>
-    <p>
-        <label for="email">信箱</label>
-        <input type="email" name="email" required>
-    </p>
-    <p>
-        <label for="password1">密碼</label>
-        <input type="password" name="password1" required>
-    </p>
-    <p>
-        <label for="password2">確認密碼</label>
-        <input type="password" name="password2" required>
-    </p>
-    <!-- {{form.as_p}} -->
-    <button type="submit">註冊</button>
-</form>
+                        <div class="field">
+                            <label class="label"> 確認密碼 </label>
+                            <div class="control has-icons-left">
+                                <input type="password" class="input" name="password2" placeholder="********" />
+                                <span class="icon is-small is-left">
+                                    <i class="fa fa-lock"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="field has-text-centered">
+                            <button type="submit" class="button is-primary is-normal" name="register">
+                                註冊
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="columns is-centered">
+                <div class="notification is-warning has-text-centered">
+                    <button class="delete has-text"></button>
+                    <span class="has-text-danger">{{message}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
