@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首頁</title>
+    <style>
+        .todo {
+            background-color: aqua;
+            border-radius: 12px;
+            padding: 12px;
+            margin: 6px;
+            width: 600px;
+        }
+    </style>
+</head>
+
+<body>
+    {% if request.user.is_authenticated %}
+    登入:{{request.user.username}}
+    <a href="{% url 'user-logout' %}">登出</a>
+    {% endif %}
+
+    <h1>TodoList</h1>
+
+    <a href="{% url 'create-todo' %}">建立代辦事項</a>
+    {% for todo in todos %}
+    <div class="todo">
+        <h4>{{todo.created}}</h4>
+        <a href="{% url 'delete-todo' todo.id %}" onclick="return confirm('確定要刪除這筆資料嗎？');">刪除</a>
+        <a href="{% url 'viewtodo' todo.id %}">修改</a>
+        <h3>{{todo.title}}</h3>
+        <p>{{todo.text}}</p>
+        <u>{{todo.important}}</u>
+        {% if todo.date_completed %}
+        <p>
+            完成時間:<u>{{todo.date_completed}}</u>
+        </p>
+        {% endif %}
+    </div>
+
+    {% endfor %}
+</body>
+
+</html>
