@@ -1,27 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+{% block title %}
+<title>建立代辦事項</title>
+{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>建立代辦事項</title>
-    <style>
-        textarea {
-            height: 200px;
-            display: block;
-            width: 210px;
-        }
-    </style>
-</head>
-
-<body>
-    <h1>Create Todo</h1>
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit">提交</button>
-    </form>
-    {{message}}
-</body>
-
-</html>
+{% block style %}
+<style>
+    textarea {
+        height: 200px;
+        display: block;
+        width: 210px;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<h1>Create Todo</h1>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">提交</button>
+</form>
+{{message}}
+{% endblock %}

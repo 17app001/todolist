@@ -1,25 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+{% block title %}
+<title>登入</title>
+{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login</title>
-</head>
+{% block style %}
 
-<body>
-    <h1>Login</h1>
-    <form action="" method="POST">
-        {% csrf_token %}
-        <label for="username">帳號</label>
-        <input type="text" name="username">
-        <br>
-        <label for="username">密碼</label>
-        <input type="password" name="password">
+</style>
+{% endblock %}
+{% block content %}
+<h1>Login</h1>
+<form action="" method="POST">
+    {% csrf_token %}
+    <label for="username">帳號</label>
+    <input type="text" name="username">
+    <br>
+    <label for="username">密碼</label>
+    <input type="password" name="password">
 
-        <input type="submit" name="登入">
-    </form>
-    {{message}}
-</body>
-
-</html>
+    <input type="submit" name="登入">
+</form>
+{{message}}
+{% endblock %}

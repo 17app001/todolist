@@ -1,20 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+{% block title %}
+<title>註冊</title>
+{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>使用者註冊</title>
-</head>
+{% block style %}
 
-<body>
-    <h1>Register</h1>
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit">註冊</button>
-    </form>
-    {{message}}
-</body>
-
-</html>
+</style>
+{% endblock %}
+{% block content %}
+<h1>Register</h1>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">註冊</button>
+</form>
+{{message}}
+{% endblock %}

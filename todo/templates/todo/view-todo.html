@@ -1,29 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+{% block title %}
+<title>建立代辦事項</title>
+{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>單一事項</title>
-    <style>
-        .todo {
-            background-color: aqua;
-            border-radius: 12px;
-            padding: 12px;
-            margin: 6px;
-            width: 600px;
-        }
-    </style>
-</head>
-
-<body>
-    <h1>View Todo</h1>
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">更新</button>
-    </form>
-    {{message}}
-</body>
-
-</html>
+{% block style %}
+<style>
+    .todo {
+        background-color: aqua;
+        border-radius: 12px;
+        padding: 12px;
+        margin: 6px;
+        width: 600px;
+    }
+</style>
+</style>
+{% endblock %}
+{% block content %}
+<h1>View Todo</h1>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">更新</button>
+</form>
+{{message}}
+{% endblock %}
