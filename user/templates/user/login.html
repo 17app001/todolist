@@ -4,20 +4,95 @@
 {% endblock %}
 
 {% block style %}
+<style>
+    .login-card {
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 20px;
+        max-width: 400px;
+        margin: 40px auto;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, .05);
+    }
 
+    .login-card h1 {
+        margin-top: 0;
+        margin-bottom: 16px;
+        font-size: 22px;
+        color: #1f2937;
+        text-align: center;
+    }
+
+    .login-card label {
+        display: block;
+        font-weight: 600;
+        margin-top: 12px;
+        margin-bottom: 4px;
+        color: #374151;
+    }
+
+    .login-card input[type="text"],
+    .login-card input[type="password"] {
+        width: 100%;
+        padding: 8px 10px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 15px;
+        background: #ffffff;
+        color: #111827;
+        transition: border .2s, box-shadow .2s;
+    }
+
+    .login-card input:focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, .3);
+        outline: none;
+    }
+
+    .login-card button,
+    .login-card input[type="submit"] {
+        margin-top: 16px;
+        width: 100%;
+        padding: 10px;
+        font-size: 15px;
+        font-weight: 600;
+        color: #fff;
+        background: #3b82f6;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background .2s;
+    }
+
+    .login-card button:hover,
+    .login-card input[type="submit"]:hover {
+        background: #1d4ed8;
+    }
+
+    .login-card .message {
+        margin-top: 12px;
+        font-size: 14px;
+        color: #6b7280;
+        text-align: center;
+    }
 </style>
 {% endblock %}
-{% block content %}
-<h1>Login</h1>
-<form action="" method="POST">
-    {% csrf_token %}
-    <label for="username">帳號</label>
-    <input type="text" name="username">
-    <br>
-    <label for="username">密碼</label>
-    <input type="password" name="password">
 
-    <input type="submit" name="登入">
-</form>
-{{message}}
+{% block content %}
+<div class="login-card">
+    <h1>登入</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label for="username">帳號</label>
+        <input type="text" name="username">
+
+        <label for="password">密碼</label>
+        <input type="password" name="password">
+
+        <input type="submit" value="登入">
+    </form>
+    {% if message %}
+    <div class="message">{{ message }}</div>
+    {% endif %}
+</div>
 {% endblock %}

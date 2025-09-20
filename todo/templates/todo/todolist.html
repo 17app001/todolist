@@ -6,36 +6,111 @@
 {% block style %}
 <style>
     .todo {
-        background-color: aqua;
-        border-radius: 12px;
-        padding: 12px;
-        margin: 6px;
-        width: 600px;
+        border: 1px solid #7dd3fc;
+        border-radius: 14px;
+        padding: 16px;
+        margin: 14px 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, .05);
+        transition: transform .15s ease, box-shadow .15s ease, background .2s;
+    }
+
+    .todo:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, .08);
+        background: color-mix(in oklab, var(--card) 88%, white);
+    }
+
+    .todo h3 {
+        margin: 6px 0;
+        color: var(--fg);
+    }
+
+    .todo p {
+        margin: 6px 0;
+        color: var(--muted);
+    }
+
+    .todo .meta {
+        font-size: 14px;
+        color: var(--muted);
+    }
+
+    .todo .actions {
+        margin-top: 10px;
+        display: flex;
+        gap: 8px;
+    }
+
+    /* 共用按鈕樣式 */
+    .todo .actions a {
+        font-size: 14px;
+        text-decoration: none;
+        padding: 6px 12px;
+        border-radius: 8px;
+        border: 1px solid transparent;
+        transition: background .2s, color .2s;
+    }
+
+    /* 修改按鈕：藍色 */
+    .todo .actions a.edit {
+        background: #e0f2fe;
+        color: #0369a1;
+        border-color: #7dd3fc;
+    }
+
+    .todo .actions a.edit:hover {
+        background: #0369a1;
+        color: #fff;
+    }
+
+    /* 刪除按鈕：紅色 */
+    .todo .actions a.delete {
+        background: #fee2e2;
+        color: #b91c1c;
+        border-color: #fecaca;
+    }
+
+    .todo .actions a.delete:hover {
+        background: #b91c1c;
+        color: #fff;
+    }
+
+    .todo .important {
+        display: inline-block;
+        font-size: 13px;
+        font-weight: 600;
+        color: #b91c1c;
+        background: #fee2e2;
+        border-radius: 6px;
+        padding: 2px 8px;
+        margin-left: 6px;
     }
 </style>
 {% endblock %}
 
-
 {% block content %}
-
-
-<h1>TodoList</h1>
-
 
 {% for todo in todos %}
 <div class="todo">
-    <h4>{{todo.created}}</h4>
-    <a href="{% url 'delete-todo' todo.id %}" onclick="return confirm('確定要刪除這筆資料嗎？');">刪除</a>
-    <a href="{% url 'viewtodo' todo.id %}">修改</a>
-    <h3>{{todo.title}}</h3>
-    <p>{{todo.text}}</p>
-    <u>{{todo.important}}</u>
-    {% if todo.date_completed %}
-    <p>
-        完成時間:<u>{{todo.date_completed}}</u>
-    </p>
-    {% endif %}
+    <div class="meta">
+        建立時間：{{ todo.created }}
+        {% if todo.date_completed %}
+        ｜ 完成時間：{{ todo.date_completed }}
+        {% endif %}
+    </div>
+    <h3>
+        {{ todo.title }}
+        {% if todo.important %}
+        <span class="important">重要</span>
+        {% endif %}
+    </h3>
+    <p>{{ todo.text }}</p>
+    <div class="actions">
+        <a href="{% url 'viewtodo' todo.id %}" class="edit">修改</a>
+        <a href="{% url 'delete-todo' todo.id %}" class="delete" onclick="return confirm('確定要刪除這筆資料嗎？');">刪除</a>
+    </div>
 </div>
-
+{% empty %}
+<p>目前沒有待辦事項。</p>
 {% endfor %}
 {% endblock %}

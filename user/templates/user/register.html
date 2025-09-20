@@ -4,15 +4,91 @@
 {% endblock %}
 
 {% block style %}
+<style>
+    .register-card {
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 20px;
+        max-width: 450px;
+        margin: 40px auto;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, .05);
+    }
 
+    .register-card h1 {
+        margin-top: 0;
+        margin-bottom: 16px;
+        font-size: 22px;
+        color: #1f2937;
+        text-align: center;
+    }
+
+    .register-card p {
+        margin: 12px 0;
+    }
+
+    .register-card label {
+        font-weight: 600;
+        color: #374151;
+    }
+
+    .register-card input[type="text"],
+    .register-card input[type="password"],
+    .register-card input[type="email"] {
+        width: 100%;
+        padding: 8px 10px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 15px;
+        background: #ffffff;
+        color: #111827;
+        transition: border .2s, box-shadow .2s;
+    }
+
+    .register-card input:focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, .3);
+        outline: none;
+    }
+
+    .register-card button {
+        margin-top: 16px;
+        width: 100%;
+        padding: 10px;
+        font-size: 15px;
+        font-weight: 600;
+        color: #fff;
+        background: #10b981;
+        /* 綠色，比登入頁藍色更有註冊感 */
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background .2s;
+    }
+
+    .register-card button:hover {
+        background: #059669;
+    }
+
+    .register-card .message {
+        margin-top: 12px;
+        font-size: 14px;
+        color: #6b7280;
+        text-align: center;
+    }
 </style>
 {% endblock %}
+
 {% block content %}
-<h1>Register</h1>
-<form action="" method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit">註冊</button>
-</form>
-{{message}}
+<div class="register-card">
+    <h1>Register</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">註冊</button>
+    </form>
+    {% if message %}
+    <div class="message">{{ message }}</div>
+    {% endif %}
+</div>
 {% endblock %}

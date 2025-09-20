@@ -5,19 +5,99 @@
 
 {% block style %}
 <style>
-    textarea {
-        height: 200px;
+    .form-card {
+        background: #f9fafb;
+        /* 淺灰背景 */
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 20px;
+        max-width: 500px;
+        margin: 20px auto;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, .05);
+    }
+
+    .form-card h1 {
+        margin-top: 0;
+        margin-bottom: 16px;
+        font-size: 20px;
+        color: #1f2937;
+        /* 深灰字 */
+    }
+
+    .form-card label {
         display: block;
-        width: 210px;
+        font-weight: 600;
+        margin-top: 10px;
+        margin-bottom: 4px;
+        color: #374151;
+    }
+
+    .form-card input[type="text"],
+    .form-card textarea,
+    .form-card select {
+        width: 100%;
+        padding: 8px 10px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 15px;
+        background: #ffffff;
+        color: #111827;
+        transition: border .2s, box-shadow .2s;
+    }
+
+    .form-card input:focus,
+    .form-card textarea:focus,
+    .form-card select:focus {
+        border-color: #3b82f6;
+        /* 藍色邊框 */
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, .3);
+        outline: none;
+    }
+
+    .form-card textarea {
+        min-height: 150px;
+        resize: vertical;
+    }
+
+    .form-card button {
+        margin-top: 16px;
+        display: inline-block;
+        padding: 8px 16px;
+        font-size: 15px;
+        font-weight: 600;
+        color: #fff;
+        background: #3b82f6;
+        /* 藍色 */
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background .2s;
+    }
+
+    .form-card button:hover {
+        background: #1d4ed8;
+        /* 深藍 */
+    }
+
+    .form-card .message {
+        margin-top: 12px;
+        font-size: 14px;
+        color: #6b7280;
+        /* 灰色文字 */
     }
 </style>
 {% endblock %}
+
 {% block content %}
-<h1>Create Todo</h1>
-<form action="" method="POST">
-    {% csrf_token %}
-    {{ form }}
-    <button type="submit">提交</button>
-</form>
-{{message}}
+<div class="form-card">
+    <h1>Create Todo</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">提交</button>
+    </form>
+    {% if message %}
+    <div class="message">{{ message }}</div>
+    {% endif %}
+</div>
 {% endblock %}
